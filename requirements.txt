@@ -1,8 +1,9 @@
+streamlit>=1.32.0
 xgboost
 pandas
 numpy
 scikit-learn
-streamlit
 networkx
 shap
-imblearn
+imbalanced-learn
+altair<5
