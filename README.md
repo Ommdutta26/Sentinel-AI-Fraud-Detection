@@ -1,315 +1,216 @@
-Sentinel-AI Fraud Detection System
+# Sentinel-AI Fraud Detection System
 
-Sentinel-AI is an advanced financial fraud detection system that combines graph analytics, machine learning, and deep learning to identify suspicious transactions in financial networks.
+Sentinel-AI is an advanced financial fraud detection system that combines **graph analytics, machine learning, and deep learning** to identify suspicious transactions in financial networks.
 
-The system analyzes transaction relationships, behavioral patterns, and temporal sequences to detect fraud with high precision.
-It uses a hybrid ensemble model (XGBoost + Neural Network + LSTM) to achieve robust fraud detection.
+The system analyzes **transaction relationships, behavioral patterns, and temporal sequences** to detect fraud with high precision. It uses a **hybrid ensemble model (XGBoost + Neural Network + LSTM)** to achieve robust fraud detection.
 
-Project Overview
+---
 
-Financial fraud is increasingly sophisticated and often involves hidden transaction networks and behavioral anomalies.
+# Project Overview
+
+Financial fraud is increasingly sophisticated and often involves **hidden transaction networks and behavioral anomalies**.
 
 Sentinel-AI addresses this by combining:
 
-Graph-based fraud detection
+- Graph-based fraud detection
+- Behavioral transaction analysis
+- Machine learning models
+- Deep learning models
+- Sequential transaction modeling
 
-Behavioral transaction analysis
+The system identifies **high-risk accounts, suspicious transaction flows, and abnormal financial behaviors**.
 
-Machine learning models
+---
 
-Deep learning models
+# Key Features
 
-Sequential transaction modeling
+## Graph-Based Fraud Detection
 
-The system identifies high-risk accounts, suspicious transaction flows, and abnormal financial behaviors.
+Builds a **transaction network using NetworkX**.
 
-Key Features
-Graph-Based Fraud Detection
+Extracted graph features include:
 
-Builds a transaction network using NetworkX.
+- PageRank
+- Betweenness Centrality
+- Node Degree
+- Clustering Coefficient
 
-Extracts graph features such as:
+These features help detect **suspicious hubs and fraud rings**.
 
-PageRank
+---
 
-Betweenness Centrality
+## Behavioral Transaction Analysis
 
-Node Degree
+Sentinel-AI captures user behavior using features such as:
 
-Clustering Coefficient
+- Transaction velocity
+- Average transaction amount
+- Transaction count
+- Amount deviation
+- Balance inconsistencies
 
-These features help detect suspicious hubs and fraud rings.
+This helps identify **abnormal spending patterns**.
 
-Behavioral Transaction Analysis
+---
 
-Sentinel-AI captures user behavior using features like:
+## Machine Learning Model (XGBoost)
 
-Transaction velocity
+An optimized **XGBoost classifier** is used for high-performance fraud prediction.
 
-Average transaction amount
+Hyperparameters are tuned using **Optuna** to maximize **AUPRC (Area Under Precision Recall Curve)**, which is crucial for **imbalanced fraud datasets**.
 
-Transaction count
+---
 
-Amount deviation
+## Neural Network Model
 
-Balance inconsistencies
-
-This helps identify abnormal spending patterns.
-
-Machine Learning Model (XGBoost)
-
-An optimized XGBoost classifier is used for high-performance fraud prediction.
-
-Hyperparameters are tuned using Optuna to maximize AUPRC (Area Under Precision Recall Curve), which is crucial for imbalanced fraud datasets.
-
-Neural Network Model
-
-A Deep Neural Network (DNN) is trained to capture nonlinear financial patterns.
+A **Deep Neural Network (DNN)** is trained to capture nonlinear financial patterns.
 
 Architecture:
 
-Input → Dense → BatchNorm → Dropout → Dense → Dense → Output
+This model improves fraud detection by learning **complex feature relationships**.
 
-This model improves fraud detection by learning complex feature relationships.
+---
 
-Sequential Fraud Detection (LSTM)
+## Sequential Fraud Detection (LSTM)
 
-Fraud often occurs in sequences of transactions.
+Fraud often occurs in **sequences of transactions**.
 
-An LSTM model is used to analyze transaction history sequences of users.
+An **LSTM model** analyzes **transaction history sequences of users**.
 
 It detects suspicious temporal patterns such as:
 
-Rapid transaction bursts
+- Rapid transaction bursts
+- Repeated transfers
+- Sudden spikes in transaction amounts
 
-Repeated transfers
+---
 
-Sudden spikes in transaction amounts
+# Ensemble Fraud Prediction
 
-Ensemble Fraud Prediction
+Sentinel-AI combines predictions from multiple models.
 
-Sentinel-AI combines predictions from multiple models:
+| Model | Weight |
+|------|------|
+| XGBoost | 0.5 |
+| Neural Network | 0.3 |
+| LSTM | 0.2 |
 
-Model	Weight
-XGBoost	0.5
-Neural Network	0.3
-LSTM	0.2
+The final fraud probability is calculated using a **weighted ensemble strategy**.
 
-Final fraud probability is calculated using a weighted ensemble strategy.
+---
 
-Dataset
+# Dataset
 
-The system uses the PaySim financial transaction dataset, which simulates real-world mobile money transactions.
+The system uses the **PaySim financial transaction dataset**, which simulates real-world mobile money transactions.
 
 Key columns include:
 
-step
+- `step`
+- `type`
+- `amount`
+- `nameOrig`
+- `oldbalanceOrg`
+- `newbalanceOrig`
+- `nameDest`
+- `oldbalanceDest`
+- `newbalanceDest`
+- `isFraud`
 
-type
+---
 
-amount
+# Feature Engineering
 
-nameOrig
+The project generates **advanced fraud detection features**.
 
-oldbalanceOrg
+## Graph Features
 
-newbalanceOrig
+- `orig_pagerank`
+- `dest_pagerank`
+- `dest_degree`
+- `dest_between`
+- `dest_cluster`
 
-nameDest
+## Behavioral Features
 
-oldbalanceDest
+- `velocity`
+- `tx_count`
+- `avg_tx_amount`
+- `amount_deviation`
 
-newbalanceDest
+## Balance Consistency Features
 
-isFraud
+- `balance_error`
+- `dest_balance_diff`
 
-Feature Engineering
+---
 
-The project generates advanced fraud detection features.
+# Handling Imbalanced Data
 
-Graph Features
+Fraud datasets are extremely **imbalanced**.
 
-orig_pagerank
+To solve this problem:
 
-dest_pagerank
+**SMOTE (Synthetic Minority Oversampling Technique)** is used to balance the dataset before training.
 
-dest_degree
+---
 
-dest_between
+# Model Evaluation
 
-dest_cluster
+Evaluation metrics used:
 
-Behavioral Features
+- Precision
+- Recall
+- F1 Score
+- AUPRC (Area Under Precision-Recall Curve)
 
-velocity
+A custom **decision threshold** is selected to ensure **high recall for fraud detection**.
 
-tx_count
+---
 
-avg_tx_amount
+# Model Explainability
 
-amount_deviation
-
-Balance Consistency Features
-
-balance_error
-
-dest_balance_diff
-
-Handling Imbalanced Data
-
-Fraud datasets are extremely imbalanced.
-
-To solve this:
-
-SMOTE (Synthetic Minority Oversampling Technique) is used to balance the dataset before training.
-
-Model Evaluation
-
-Metrics used:
-
-Precision
-
-Recall
-
-F1 Score
-
-AUPRC (Area Under Precision-Recall Curve)
-
-A custom decision threshold is selected to ensure high recall for fraud detection.
-
-Model Explainability
-
-The system uses SHAP (SHapley Additive Explanations) to explain model predictions.
+The system uses **SHAP (SHapley Additive Explanations)** to explain model predictions.
 
 This helps identify:
 
-Most influential fraud features
+- Most influential fraud features
+- Model decision reasoning
+- Transaction risk drivers
 
-Model decision reasoning
+---
 
-Transaction risk drivers
+# Fraud Network Visualization
 
-Fraud Network Visualization
+Fraudulent transactions are visualized using **network graphs** to detect clusters of suspicious accounts.
 
-Fraudulent transactions are visualized using Network Graphs to detect clusters of suspicious accounts.
+Examples include:
 
-Example visualization:
+- Fraud transaction network
+- Suspicious account hubs
+- Fraud rings
 
-Fraud transaction network
+---
 
-Suspicious account hubs
+# Project Architecture
 
-Fraud rings
+---
 
-Project Architecture
-Dataset
-   │
-   ├── Data Preprocessing
-   │
-   ├── Feature Engineering
-   │      ├── Graph Features
-   │      ├── Behavioral Features
-   │      └── Balance Features
-   │
-   ├── Data Balancing (SMOTE)
-   │
-   ├── Model Training
-   │      ├── XGBoost
-   │      ├── Neural Network
-   │      └── LSTM
-   │
-   ├── Ensemble Model
-   │
-   └── Fraud Prediction System
-Fraud Risk Classification
+# Fraud Risk Classification
 
-The system categorizes transactions into three risk levels.
+Transactions are classified into three risk levels.
 
-Probability	Classification
-≥ 85%	High Risk (Fraud)
-60% – 85%	Suspicious
-< 60%	Normal
-Installation
+| Probability | Classification |
+|-------------|---------------|
+| ≥ 85% | High Risk (Fraud) |
+| 60% – 85% | Suspicious |
+| < 60% | Normal |
+
+---
+
+# Installation
 
 Clone the repository:
 
+```bash
 git clone https://github.com/yourusername/Sentinel-AI-Fraud.git
 cd Sentinel-AI-Fraud
-
-Install dependencies:
-
-pip install -r requirements.txt
-Required Libraries
-pandas
-numpy
-networkx
-scikit-learn
-xgboost
-tensorflow
-imblearn
-optuna
-shap
-matplotlib
-joblib
-Running the Project
-
-Run the fraud detection pipeline:
-
-python fraud_detection.py
-Model Files
-
-Saved models:
-
-fraud_xgboost.pkl
-fraud_nn.keras
-lstm_model.keras
-
-These models are used for real-time fraud prediction.
-
-Example Fraud Prediction
-status, probability, risk = predict_fraud(
-    amount=5000,
-    old_balance=10000,
-    new_balance=5000,
-    old_dest_balance=2000,
-    new_dest_balance=7000,
-    dest_degree=3,
-    velocity=2000,
-    type_transfer=1,
-    type_cashout=0
-)
-
-print(status, probability, risk)
-
-Output Example:
-
-🚨 FRAUD DETECTED 91.23% HIGH RISK
-Future Improvements
-
-Graph Neural Networks (GNN) for fraud detection
-
-Real-time streaming fraud detection
-
-Fraud ring detection algorithms
-
-Explainable AI dashboard
-
-API integration for banking systems
-
-Applications
-
-Banking fraud detection
-
-Payment gateway security
-
-Digital wallet protection
-
-Financial compliance systems
-
-Author
-
-Omm Dutta
-
-AI / Machine Learning Developer
-
-If you want, I can also give you a 🔥 much stronger GitHub README (with badges, architecture diagrams, and screenshots) so that this project looks like a top-tier placement project.
