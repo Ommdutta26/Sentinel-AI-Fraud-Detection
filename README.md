@@ -1,5 +1,5 @@
 # Sentinel-AI Fraud Detection System
-
+🚀 Live Demo: https://sentinel-ai-fraud-detection.onrender.com/
 Sentinel-AI is an advanced financial fraud detection system that combines **graph analytics, machine learning, and deep learning** to identify suspicious transactions in financial networks.
 
 The system analyzes **transaction relationships, behavioral patterns, and temporal sequences** to detect fraud with high precision. It uses a **hybrid ensemble model (XGBoost + Neural Network + LSTM)** to achieve robust fraud detection.
