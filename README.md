@@ -92,8 +92,8 @@ Sentinel-AI combines predictions from multiple models.
 | Model | Weight |
 |------|------|
 | XGBoost | 0.5 |
-| Neural Network | 0.3 |
-| LSTM | 0.2 |
+| Neural Network | 0.4 |
+| LSTM | 0.1 |
 
 The final fraud probability is calculated using a **weighted ensemble strategy**.
 
