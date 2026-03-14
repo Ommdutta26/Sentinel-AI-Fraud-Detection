@@ -105,8 +105,8 @@ def predict_fraud(
         # -----------------------------
         weights = {
             "xgb": 0.5,
-            "nn": 0.3,
-            "lstm": 0.2
+            "nn": 0.4,
+            "lstm": 0.1
         }
 
         final_prob = (
@@ -118,7 +118,7 @@ def predict_fraud(
         # -----------------------------
         # Decision Logic
         # -----------------------------
-        if final_prob >= 0.85:
+        if final_prob >= 0.75:
             status = "🚨 FRAUD DETECTED"
             risk = "HIGH RISK"
 
