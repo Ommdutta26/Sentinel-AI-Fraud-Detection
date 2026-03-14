@@ -201,7 +201,7 @@ Transactions are classified into three risk levels.
 
 | Probability | Classification |
 |-------------|---------------|
-| ≥ 85% | High Risk (Fraud) |
+| ≥ 75% | High Risk (Fraud) |
 | 60% – 85% | Suspicious |
 | < 60% | Normal |
 
